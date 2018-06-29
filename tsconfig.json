@@ -1,0 +1,20 @@
+{
+ "datas":{
+   "ext": "video",
+   "id": "string",
+   "length": 0,
+   "name": "string",
+   "pages": [
+     "static/img/timg.jpg",
+     "static/img/timg1.jpg",
+     "static/img/timg2.jpg"
+   ],
+   "path": "string",
+   "poster": "string",
+   "progress": 1,
+   "size": 0,
+   "src": "",
+   "status": 0
+ },
+  "success":true
+}

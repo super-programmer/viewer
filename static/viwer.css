@@ -1,0 +1,39 @@
+.fileBox{
+  position:relative;
+  width:900px;
+  height:506px;
+  margin:0 auto;
+  overflow:auto;
+}
+.fileBox--fullscreen{
+  position:fixed;
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  z-index:99;
+}
+.fileBox--fullscreen .file-btn-fullscreen{
+  display:none;
+}
+.filebox-con{
+  width:882px;
+  height:506px;
+  overflow:hidden;
+}
+.filebox-con img{
+  display:block;
+  max-width:100%;
+}
+/*全屏按钮*/
+.file-btn-fullscreen{
+  display:block;
+  position:absolute;
+  right:16px;
+  top:16px;
+  width:26px;
+  height:26px;
+  background:url('./img/full-screen.png') no-repeat center;
+  cursor:pointer;
+  z-index:99;
+}
