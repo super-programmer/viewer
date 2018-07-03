@@ -139,6 +139,7 @@ export default {
     exitFullScreen: function (ev) {
       this.$data.clicked = false
     },
+
     // 暴露方法
     seekTo: function (i) {
 
