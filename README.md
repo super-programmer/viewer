@@ -1,30 +1,66 @@
 # viewer
 
-> A Vue.js project
+> 课件预览插件
 
-## Build Setup
+## Install
 
-``` bash
-# install dependencies
-npm install
+npm install viewer --save
 
-# serve with hot reload at localhost:8080
-npm run dev
+## Usage
 
-# build for production with minification
-npm run build
+```
+import viewer from 'viewer'
+import 'viewer/src/assets/viewer.css'
+Vue.use(viewer)
 
-# build for production and view the bundle analyzer report
-npm run build --report
+```
+```
+<template>
+  <div>
+    <viewer :fileId="fileId" ref="mychild"></viewer>
+  </div>
+</template>
+<script>
+export default {
+  name: 'demo',
+  data () {
+    return {
+      fileId: 'c7dfc8c4c484de317d58b1753aa87cc0ppt4c400'
+    }
+  },
+  mounted: function () {
+    this.seekTo()
+  },
+  methods: {
+    seekTo () {
+      this.$refs.mychild.seekTo(200)
+    }
+  },
+  components: {
 
-# run unit tests
-npm run unit
+  }
+}
+</script>
+<style scoped>
+</style>
 
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Attributes
+
+参数 | 说明 | 类型 | 是否必须 | 默认值
+--- | --- | --- | --- | ---
+fileId | 文件id | string | 是 | 无
+
+
+## 初始化函数说明
+
+记录轨迹参数i是number类型
+
+seekTo(i)
+
+##
+
+
+
+

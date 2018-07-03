@@ -3,10 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import '@/assets/viwer.css'
-
+// import './assets/viewer.css'
+import viewer from '../lib/ygui-viewer.min'
 Vue.config.productionTip = false
-
+Vue.use(viewer)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

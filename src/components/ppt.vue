@@ -4,36 +4,36 @@
   </div>
 </template>
 <script>
-  export default {
-    name: "ppt",
-    props: ['fileid'],
-    data() {
-      return {
-        clicked: false,
-        src:`http://192.168.10.14/download/demo/ppt/index.html?fileid=${this.fileid}`
+export default {
+  name: 'ppt',
+  props: ['path'],
+  data () {
+    return {
+      clicked: false,
+      src: `http://static.yunguiedu.com/common/ppt/index.html?fileid=${this.path}`
+    }
+  },
+  mounted () {
+    var _this = this
+    window.addEventListener('message', function (e) {
+      if (e.data === 'fullscreen') {
+        _this.fullscreen()
+      } else if (e.data === 'exitfullscreen') {
+        _this.exitFullScreen()
       }
+    }, false)
+  },
+  methods: {
+    // 全屏事件
+    fullscreen: function (ev) {
+      this.$data.clicked = !this.$data.clicked
     },
-    mounted(){
-      var _this = this;
-      window.addEventListener("message",function(e){
-        if('fullscreen' === e.data){
-          _this.fullscreen();
-        }else if('exitfullscreen' === e.data){
-          _this.exitFullScreen();
-        }
-      },false);
-    },
-    methods: {
-      //全屏事件
-      fullscreen: function (ev) {
-        this.$data.clicked = !this.$data.clicked;
-      },
-      //退出全屏
-      exitFullScreen: function (ev) {
-        console.log(this.$data.clicked)
-      },
+    // 退出全屏
+    exitFullScreen: function (ev) {
+      this.$data.clicked = false
     }
   }
+}
 </script>
 
 <style scoped>

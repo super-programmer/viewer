@@ -1,19 +1,26 @@
 <template>
   <div>
-    <img v-for="item in pages" v-bind:src="item">
+    <img v-for="item in list" v-bind:src="item">
   </div>
 </template>
 <script>
-  // import getDoc from '@/api/api'
-  export default {
-    name: 'doc',
-    props: ['pages'],
-    data() {
-      return {}
+export default {
+  name: 'doc',
+  props: ['pages'],
+  data () {
+    return {
+      list: []
     }
+  },
+  created: function () {
+    // 添加域名
+    var _this = this
+    this.pages.map(function (item) {
+      _this.$data.list.push(`http://fs.yunguiedu.com/${item}`)
+    })
   }
+}
 </script>
 
 <style scoped>
-
 </style>
