@@ -5,6 +5,9 @@
       <Doc v-if="doc" :pages="pages"></Doc>
       <Ppt v-if="ppt" :path="path"></Ppt>
       <Video v-if="video" :filedata="filedata"></Video>
+      <div class="filebox-tips" v-if="tipsflag">
+        {{tips}}
+      </div>
         <!--<transition name="fade">-->
           <!--<div class="file&#45;&#45;loading" v-if="!loadend"></div>-->
         <!--</transition>-->
@@ -27,7 +30,9 @@ export default {
   data () {
     return {
       filedata: {
+        type: '',
         src: '',
+        name: '',
         poster: ''
       }, // 多媒体数据
       loadend: false, // 下载完成表示
@@ -39,14 +44,16 @@ export default {
       img: '', // 图片
       src: '', // 图片src
       ppt: false, // ppt
-      path: '' // pptid
+      path: '', // pptid
+      timer: '', // 轮询定时器
+      tipsflag: false, // 提示语开关
+      tips: '' // 提示语
     }
   },
   created: function () {
     let _this = this
     let fileId = this.fileId
-    let storage = window.localStorage
-    storage['access_token'] = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1NzkwOTQiLCJleHAiOjE1MzA1MDQ1OTksInVpZCI6NTc5MDk0LCJraWQiOm51bGwsIm5hbWUiOiLpn6nmooXmooUiLCJ0eXAiOiJhY2MiLCJwaWQiOiJVNTc5MDk0UzI0UjEiLCJyaWQiOjEsImF1cyI6WyJST0xFX0FVVEhFRCIsIlJPTEVfU1RVREVOVCJdLCJzaWQiOjI0fQ.a41J1Uu_sIKgRy_kPOKVIBchSbWNhaTFcTmnvwW1pkY'
+
     /* 绑定esc键盘事件 */
     document.onkeydown = function (ev) {
       if (ev.keyCode === 27) {
@@ -65,53 +72,48 @@ export default {
   methods: {
     // 拉取数据
     getDocData: function (fileid) {
-      let timer = ''
-      let sum = 0
       var _this = this
-
       // 状态，0：等待中，1：转换中，2：转换成功，3：转换失败
-
-      timer = setInterval(function () {
-        sum++
-        axios.get(`http://api.yunguiedu.com/file/apidoc/files/${fileid}`).then(res => {
-          if (res) {
-            if (res.data.status === 2) {
-              if (!res.data.progress) {
-                _this.analyzeData(res.data)
-                _this.loadend = true
-                clearInterval(timer)
-              } else if (res.data.progress === 100) {
-                _this.analyzeData(res.data)
-                _this.loadend = true
-                clearInterval(timer)
-              }
-            } else if (res.data.status === 1) {
-
-            } else if (res.data.status === 0) {
-
-            } else {
-
-            }
+      axios.get(`http://api.yunguiedu.com/file/files/${fileid}`).then(res => {
+        if (res) {
+          if (res.data.status === 2) {
+            _this.$data.tipsflag = false
+            _this.analyzeData(res.data)
+            _this.loadend = true
+            clearInterval(_this.$data.timer)
+          } else if (res.data.status === 1) {
+            _this.$data.tipsflag = true
+            _this.$data.tips = '转换中'
+            clearInterval(_this.$data.timer)
+          } else if (res.data.status === 0) {
+            _this.$data.tipsflag = true
+            _this.$data.tips = '等待中'
+            clearInterval(_this.$data.timer)
           } else {
-
+            _this.$data.tipsflag = true
+            _this.$data.tips = '转换失败'
+            clearInterval(_this.$data.timer)
           }
-        })
-      }, 1000)
-      if (sum >= 30) {
-        clearInterval(timer)
-      }
+        } else {
+
+        }
+      })
     },
     // 数据分析
     analyzeData: function (data) {
       switch (data.type) {
         case 'video':
           this.$data.video = true
+          this.$data.filedata.type = data.ext
           this.$data.filedata.src = data.src
+          this.$data.filedata.name = data.name
           this.$data.filedata.poster = data.poster
           break
         case 'audio':
           this.$data.video = true
+          this.$data.filedata.type = data.ext
           this.$data.filedata.src = data.src
+          this.$data.filedata.name = data.name
           this.$data.filedata.poster = data.poster
           break
         case 'ppt':

@@ -84,3 +84,9 @@
 {
   opacity: 0;
 }
+.filebox-tips{
+  height:100%;
+  line-height:500px;
+  font-size:20px;
+  text-align:center;
+}

@@ -1,7 +1,7 @@
 {
   "name": "viewer",
-  "version": "1.0.0",
-  "description": "A Vue.js project",
+  "version": "1.0.5",
+  "description": "课件预览组件",
   "author": "super-programmer <593655843@qq.com>",
   "main": "lib/ygui-viewer.min.js",
   "private": false,
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
     "jquery": "^3.3.1",
     "mediaelement": "^4.2.9",
     "style-loader": "^0.21.0",
@@ -81,7 +82,8 @@
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "webpack-server": "^0.1.2"
   },
   "engines": {
     "node": ">= 6.0.0",

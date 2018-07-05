@@ -3,7 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import './assets/viewer.css'
+import './assets/viewer.css'
+import 'babel-polyfill'
 import viewer from '../lib/ygui-viewer.min'
 Vue.config.productionTip = false
 Vue.use(viewer)

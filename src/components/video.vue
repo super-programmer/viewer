@@ -1,21 +1,17 @@
 <template>
-  <div id="video">
-    <video v-bind:src="src" v-bind:poster="poster" style="width:882px;height:506px;"></video>
-  </div>
+  <div id="player" style="width:882px;height:506px;"></div>
 </template>
 
 <script>
-import 'mediaelement'
-import 'mediaelement/build/mediaelementplayer.min.css'
-props:['filedata']
 export default {
-  name: 'audio',
+  name: 'media',
+  props: ['filedata'],
   data () {
     return {
-      /* src:this.filedata.src,
-        poster:this.filedata.poster, */
-      src: 'http://fs.yunguiedu.com/group1/M00/00/07/wKgKjFst_zmADExtAAACq5RSq0082.m3u8',
-      poster: 'http://www.mediaelementjs.com/images/big_buck_bunny.jpg'
+      src: `http://fs.yunguiedu.com/${this.filedata.src}`,
+      type: `${this.filedata.type}`,
+      name: `${this.filedata.name}`,
+      poster: `http://fs.yunguiedu.com/${this.filedata.poster}`
     }
   },
   mounted () {
@@ -23,22 +19,30 @@ export default {
   },
   methods: {
     initPlayer () {
-      var player = new MediaElementPlayer(document.querySelector('video'), {
-        mode: 'shim',
-        enablePluginDebug: true,
-        defaultVideoWidth: 882,
-        defaultVideoHeight: 506,
-        pluginPath: 'build/',
-        features: ['playpause', 'progress', 'volume', 'duration', 'fullscreen'],
-        poster: this.poster,
-        success: me => {
-        }
-      })
+      var _this = this
+      var oHead = document.getElementsByTagName('HEAD').item(0)
+      var script1 = document.createElement('script')
+      script1.type = 'text/javascript'
+      script1.src = 'http://static.yunguiedu.com/common/player/sewise.player.min.js'
+      oHead.appendChild(script1)
+      setTimeout(function () {
+        SewisePlayer.setup({
+          server: 'vod',
+          type: `${_this.type}`,
+          autostart: 'true',
+          poster: `${_this.poster}`,
+          videourl: `${_this.src}`,
+          skin: 'vodWhite',
+          title: `${_this.name}`,
+          logo: ' ',
+          lang: 'zh_CN',
+          claritybutton: 'disable'
+        }, 'player')
+      }, 500)
     }
   }
 }
 </script>
-
 <style scoped>
 
 </style>
