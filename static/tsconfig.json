@@ -5,15 +5,15 @@
    "length": 0,
    "name": "string",
    "pages": [
-     "http://g.hiphotos.baidu.com/image/pic/item/37d3d539b6003af33cd1a3ee392ac65c1138b6d0.jpg",
-     "http://g.hiphotos.baidu.com/image/pic/item/b7003af33a87e95053e42ae21c385343faf2b449.jpg",
-     "http://f.hiphotos.baidu.com/image/pic/item/bd315c6034a85edf50107fa445540923dc54759d.jpg"
+     "https://g.hiphotos.baidu.com/image/pic/item/37d3d539b6003af33cd1a3ee392ac65c1138b6d0.jpg",
+     "https://g.hiphotos.baidu.com/image/pic/item/b7003af33a87e95053e42ae21c385343faf2b449.jpg",
+     "https://f.hiphotos.baidu.com/image/pic/item/bd315c6034a85edf50107fa445540923dc54759d.jpg"
    ],
-   "path": "http://www.mediaelementjs.com/images/big_buck_bunny.jpg",
+   "path": "https://www.mediaelementjs.com/images/big_buck_bunny.jpg",
    "poster": "string",
    "progress": 100,
    "size": 0,
-   "src": "http://fs.yunguiedu.com/group1/M00/00/07/wKgKjFst_zmADExtAAACq5RSq0082.m3u8",
+   "src": "https://fs.yunguxt.com/group1/M00/00/07/wKgKjFst_zmADExtAAACq5RSq0082.m3u8",
    "status": 0
  },
   "success":true

@@ -6,7 +6,7 @@
 <script>
 export default {
   name: 'doc',
-  props: ['src'],
+  props: ['src', 'filedata'],
   data () {
     return {
       imgsrc: ''
@@ -14,7 +14,7 @@ export default {
   },
   created: function () {
     // 添加域名
-    this.imgsrc = `http://fs.yunguiedu.com/${this.src}`
+    this.imgsrc = `${this.filedata.baseUrl}${this.src}`
   }
 }
 </script>

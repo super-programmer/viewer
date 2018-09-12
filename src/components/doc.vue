@@ -6,7 +6,7 @@
 <script>
 export default {
   name: 'doc',
-  props: ['pages'],
+  props: ['pages', 'filedata'],
   data () {
     return {
       list: []
@@ -16,7 +16,7 @@ export default {
     // 添加域名
     var _this = this
     this.pages.map(function (item) {
-      _this.$data.list.push(`http://fs.yunguiedu.com/${item}`)
+      _this.$data.list.push(`${_this.filedata.baseUrl}${item}`)
     })
   }
 }
